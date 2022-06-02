@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,5 +33,21 @@ public class MemberServiceTest {
 
         //when
         final MembershipException result = assertThrows(MembershipException.class, () -> target.addMember(userId, membershipType, point));
+    }
+
+    @Test
+    public void create_member_success () {
+        //given
+        doReturn(null).when(memberRepository).finByUserMembershipType(userId, membershipType);
+        doReturn(member()).when(memberRepository).save(any(Member.class));
+    }
+
+    private Object member() {
+        return Member.builder()
+            .id(-1L)
+            .userId(userId)
+            .point(point)
+            .membershipType(membershipType.NAVER)
+            .build();
     }
 }
