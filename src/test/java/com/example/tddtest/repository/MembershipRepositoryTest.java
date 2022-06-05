@@ -1,5 +1,6 @@
 package com.example.tddtest.repository;
 
+import com.example.tddtest.domain.Membership;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -12,8 +13,28 @@ public class MembershipRepositoryTest {
     @Autowired
     private MembershipRepository membershipRepository;
 
+//    @Test
+//    public void MmbershipRepository가null이아님() {
+//        assertThat(membershipRepository).isNotNull();
+//    }
+
     @Test
-    public void MmbershipRepository가null이아님() {
-        assertThat(membershipRepository).isNotNull();
+    public void 멤버십등록() {
+
+        //given
+        final Membership membership = Membership.builder()
+                .userId("userId")
+                .membershipName("네이버")
+                .point(10000)
+                .build();
+
+        //when
+        final Membership result = membershipRepository.save(membership);
+
+        //then
+        assertThat(result.getId()).isNotNull();
+        assertThat(result.getUserId()).isEqualTo("userId");
+        assertThat(result.getMembershipName()).idEqualTo("네이버");
+        assertThat(result.getPoint()).idEqualTo(10000);
     }
 }
