@@ -34,7 +34,7 @@ public class MembershipRepositoryTest {
         //then
         assertThat(result.getId()).isNotNull();
         assertThat(result.getUserId()).isEqualTo("userId");
-        assertThat(result.getMembershipName()).idEqualTo("네이버");
-        assertThat(result.getPoint()).idEqualTo(10000);
+        assertThat(result.getMembershipName()).isEqualTo("네이버");
+        assertThat(result.getPoint()).isEqualTo(10000);
     }
 }
