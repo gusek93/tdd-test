@@ -1,5 +1,6 @@
 package com.example.tddtest.repository;
 
+import com.example.tddtest.domain.MembershipType;
 import com.example.tddtest.domain.Membership;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class MembershipRepositoryTest {
         //given
         final Membership membership = Membership.builder()
                 .userId("userId")
-                .membershipName("네이버")
+                .membershipType(MembershipType.NAVER)
                 .point(10000)
                 .build();
 
@@ -34,7 +35,7 @@ public class MembershipRepositoryTest {
         //then
         assertThat(result.getId()).isNotNull();
         assertThat(result.getUserId()).isEqualTo("userId");
-        assertThat(result.getMembershipName()).isEqualTo("네이버");
+        assertThat(result.getMembershipType()).isEqualTo(MembershipType.NAVER);
         assertThat(result.getPoint()).isEqualTo(10000);
     }
 }
