@@ -2,6 +2,8 @@ package com.example.tddtest.service;
 
 import com.example.tddtest.domain.Membership;
 import com.example.tddtest.domain.MembershipType;
+import com.example.tddtest.exception.MembershipErrorResult;
+import com.example.tddtest.exception.MembershipException;
 import com.example.tddtest.repository.MembershipRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +32,13 @@ public class MembershipServiceTest {
     @Test
     public void 멤버십등록실패_이미존재함() {
         //given
-        doReturn(Membership.builder().build().when(membershipRepository)).findByUserIdAndMembershipType(userId, membershipType);
+        doReturn(Membership.builder().build()).when(membershipRepository).findByUserIdAndMembershipType(userId, membershipType);
 
         //when
         final MembershipException result = assertThrows(MembershipException.class, () -> target.addMembership(userId, membershipType, point));
 
         //then
-        assertThat(result.getErrorResult()).isEqualTo(MembershipErorResult.DUPLICATED_MEMBERSHIP_REGISTER);
+        assertThat(result.getErrorResult()).isEqualTo(MembershipErrorResult.DUPLICATED_MEMBERSHIP_REGISTER);
     }
 
 }

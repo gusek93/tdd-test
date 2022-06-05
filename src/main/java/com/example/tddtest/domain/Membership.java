@@ -1,5 +1,6 @@
 package com.example.tddtest.domain;
 
+import com.example.tddtest.repository.MembershipRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
