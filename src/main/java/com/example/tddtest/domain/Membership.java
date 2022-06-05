@@ -1,10 +1,12 @@
 package com.example.tddtest.domain;
 
-
-import lombok.*;
+import com.example.tddtest.repository.MembershipRepository;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,9 +15,9 @@ import java.time.LocalDateTime;
 @Table
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+@NoArgsConstructor
+public class Membership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +35,10 @@ public class Member {
 
     @CreationTimestamp
     @Column(nullable = false, length = 20, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
-    @UpdateTimestamp
+    @CreationTimestamp
     @Column(length = 20)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updateAt;
 
 }

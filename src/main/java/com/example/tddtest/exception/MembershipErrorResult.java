@@ -1,6 +1,5 @@
 package com.example.tddtest.exception;
 
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum MembershipErrorResult {
 
     DUPLICATED_MEMBERSHIP_REGISTER(HttpStatus.BAD_REQUEST, "Duplicated Membership Register Request"),
-    ;
+        ;
 
     private final HttpStatus httpStatus;
     private final String message;
