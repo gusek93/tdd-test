@@ -1,6 +1,7 @@
 package com.example.tddtest.controller;
 
 import com.example.tddtest.domain.MembershipType;
+import com.example.tddtest.service.MembershipRequest;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ public class MembershipControllerTest {
 
     @BeforeEach
     public void init() {
+        gson = new Gson();
         mockMvc = MockMvcBuilders.standaloneSetup(target)
                 .build();
     }
@@ -39,12 +41,19 @@ public class MembershipControllerTest {
         //when
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.post(url)
-                        .content(membershipRequest(10000, MembershipType.NAVER))
+                        .content(gson.toJson(membershipRequest(10000, MembershipType.NAVER)))
                         .contentType(MediaType.APPLICATION_JSON)
         );
 
         //then
         resultActions.andExpect(status().isBadRequest());
+    }
+
+    private MembershipRequest membershipRequest(final Integer point, final MembershipType membershipType) {
+        return MembershipRequest.builder()
+                .point(point)
+                .membershipType(membershipType)
+                .build();
     }
 
 }
