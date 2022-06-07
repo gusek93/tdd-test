@@ -61,40 +61,40 @@ public class MembershipRepositoryTest {
         assertThat(findResult.getPoint()).isEqualTo(10000);
     }
 
-    @Test
-    public void 멤버십조회_사이즈가0() {
-
-        //when
-        List<Membership> result = membershipRepository.findAllByUserId("userID");
-
-        //then
-        assertThat(result.size()).isEqualTo(0);
-
-    }
-
-    @Test
-    public void 멤버십조회_사이즈가2() {
-
-        //given
-        final Membership naverMemberhsip = Membership.builder()
-                .userId("userId")
-                .membershipType(MembershipType.NAVER)
-                .point(10000)
-                .build();
-
-        final Membership kakaoMembership = Membership.builder()
-                .userId("userId")
-                .membershipType(MembershipType.KAKAO)
-                .point(10000)
-                .build();
-
-        membershipRepository.save(naverMemberhsip);
-        membershipRepository.save(kakaoMembership);
-
-        //when
-        List<Membership> result = membershipRepository.findAllByUserId("userId");
-
-        //then
-        assertThat(result.size()).isEqualTo(2);
-    }
+//    @Test
+//    public void 멤버십조회_사이즈가0() {
+//
+//        //when
+//        List<Membership> result = membershipRepository.findAll();
+//
+//        //then
+//        assertThat(result.size()).isEqualTo(0);
+//
+//    }
+//
+//    @Test
+//    public void 멤버십조회_사이즈가2() {
+//
+//        //given
+//        final Membership naverMemberhsip = Membership.builder()
+//                .userId("userId")
+//                .membershipType(MembershipType.NAVER)
+//                .point(10000)
+//                .build();
+//
+//        final Membership kakaoMembership = Membership.builder()
+//                .userId("userId")
+//                .membershipType(MembershipType.KAKAO)
+//                .point(10000)
+//                .build();
+//
+//        membershipRepository.save(naverMemberhsip);
+//        membershipRepository.save(kakaoMembership);
+//
+//        //when
+//        List<Membership> result = membershipRepository.findAll();
+//
+//        //then
+//        assertThat(result.size()).isEqualTo(2);
+//    }
 }

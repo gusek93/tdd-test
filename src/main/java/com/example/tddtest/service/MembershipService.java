@@ -37,8 +37,8 @@ public class MembershipService {
                 .build();
     }
 
-    public List<MembershipDetailResponse> getMembershipList(final String userId) {
-        final List<Membership> membershipList = membershipRepository.findAllByUserId(userId);
+    public List<MembershipDetailResponse> getMembershipList() {
+        final List<Membership> membershipList = membershipRepository.findAll();
 
         return membershipList.stream()
                 .map(v -> MembershipDetailResponse.builder()

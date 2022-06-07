@@ -81,10 +81,10 @@ public class MembershipServiceTest {
                 Membership.builder().build(),
                 Membership.builder().build(),
                 Membership.builder().build()
-        )).when(membershipRepository).findAllByUserId(userId);
+        )).when(membershipRepository).findAll();
 
         //when
-        final List<MembershipDetailResponse> result = target.getMembershipList(userId);
+        final List<MembershipDetailResponse> result = target.getMembershipList();
 
         //then
         assertThat(result.size()).isEqualTo(3);

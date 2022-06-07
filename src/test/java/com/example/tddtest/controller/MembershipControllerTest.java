@@ -4,6 +4,7 @@ import com.example.tddtest.domain.MembershipType;
 import com.example.tddtest.exception.GlobalExceptionHandler;
 import com.example.tddtest.exception.MembershipErrorResult;
 import com.example.tddtest.exception.MembershipException;
+import com.example.tddtest.service.MembershipDetailResponse;
 import com.example.tddtest.service.MembershipRequest;
 import com.example.tddtest.service.MembershipResponse;
 import com.example.tddtest.service.MembershipService;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import static com.example.tddtest.controller.MembershipConstants.USER_ID_HEADER;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -122,6 +124,28 @@ public class MembershipControllerTest {
 
         assertThat(response.getId()).isNotNull();
         assertThat(response.getMembershipType()).isEqualTo(MembershipType.NAVER);
+
+    }
+
+    @Test
+    public void 멤버십목록조회성공() throws Exception {
+
+        //given
+        final String url = "/api/v1/memberships";
+        doReturn(Arrays.asList(
+            MembershipDetailResponse.builder().build(),
+            MembershipDetailResponse.builder().build(),
+            MembershipDetailResponse.builder().build()
+        )).when(membershipService).getMembershipList();
+
+        //when
+        final ResultActions resultActions = mockMvc.perform(
+            MockMvcRequestBuilders.get(url)
+                .header(USER_ID_HEADER, "12345")
+        );
+
+        //then
+        resultActions.andExpect(status().isOk());
 
     }
 
